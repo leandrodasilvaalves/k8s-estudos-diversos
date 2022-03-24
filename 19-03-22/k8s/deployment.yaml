@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperatura-api
+spec:
+  selector:
+    matchLabels:
+      app: temperatura-api
+  template:
+    metadata:
+      labels:
+        app: temperatura-api
+    spec:
+      containers:
+      - name: temperatura-api
+        image: temperatura:1.0.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: temperatura-api-service
+spec:
+  selector:
+    app: temperatura-api
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: 30951

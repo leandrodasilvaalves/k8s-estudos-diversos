@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-temperatura
+spec:
+  type: ExternalName
+  externalName: temperatura-api-service.api.svc.cluster.local

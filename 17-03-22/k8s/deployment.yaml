@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: webapp:1.0.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:  
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development             
+        - name: ApiOptions__ForeCastApiUrl
+          # value: "http://temperatura-api-service/weatherforecast"          
+          # referenciando serviço em outro nampespace. Aqui foram criados os namespaces `api` e `webapp`
+          # value: "http://temperatura-api-service.api.svc.cluster.local/weatherforecast"          
+          # referenciando um servido do tipo ExternalName, porém o webapp imlantado no namespace default
+          value: "http://api-temperatura/weatherforecast"          
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    app: webapp
+  type: LoadBalancer   
+  ports:
+  - port: 80
+    nodePort: 30950
+
