@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elk-deployment
+spec:
+  selector:
+    matchLabels:
+      app: elk
+  template:
+    metadata:
+      labels:
+        app: elk
+    spec:
+      containers:
+        - name: elk
+          image: sebp/elk:780
+          resources:
+            limits:
+              memory: "2000Mi"
+              cpu: "1000m"
+          env:
+            - name: "LOGSTASH_START"   
+              value: "0"
+          ports:
+            - containerPort: 5601
+              name: "kibana"              
+            - containerPort: 9200
+              name: "els"
+            - containerPort: 5044
+              name: "logstash"
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: elk-service
+spec:
+  selector:
+    app: elk
+  type: NodePort
+  ports:
+    - port: 5601
+      nodePort: 30956
+      name: "kibana"
+    - port: 9200
+      nodePort: 30959
+      name: "els"
+    - port: 5044
+      nodePort: 30958
+      name: "logstash"

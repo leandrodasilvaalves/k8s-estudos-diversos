@@ -5,3 +5,4 @@ kind load docker-image webapp:1.0.0 --name meu-cluster
 kind load docker-image temperatura:1.0.0 --name meu-cluster
 kind load docker-image nginx:1.9.4 --name meu-cluster
 kind load docker-image rabbitmq:3.9-management --name meu-cluster
+kind load docker-image sebp/elk:780 --name meu-cluster

@@ -7,7 +7,7 @@ nodes:
     - containerPort: 30950
       hostPort: 80 # webap
     - containerPort: 30951
-      hostPort: 81 # temperatura
+      hostPort: 81 # temperatura-api
     - containerPort: 30952
       hostPort: 82 #nginx 
     - containerPort: 30953
@@ -17,17 +17,17 @@ nodes:
     - containerPort: 30954
       hostPort: 84 # rabbitmq ui
     - containerPort: 30955
-      hostPort: 85 # rabbitmq ampq
+      hostPort: 85 # rabbitmq amqp
     - containerPort: 30956
-      hostPort: 86
+      hostPort: 86 # kibana
     - containerPort: 30957
-      hostPort: 87
+      hostPort: 87 
 - role: worker
   extraPortMappings:
     - containerPort: 30958
-      hostPort: 88
+      hostPort: 88 # logstash
     - containerPort: 30959
-      hostPort: 89
+      hostPort: 89 # elastic search
     - containerPort: 30960
       hostPort: 90
     - containerPort: 30961
