@@ -26,3 +26,33 @@ spec:
             name: mongo-express-service
             port: 
               number: 8081
+  - host: elasticsearch.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: elk-service
+            port: 
+              number: 9200
+  - host: kibana.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: elk-service
+            port: 
+              number: 5601
+  - host: logstash.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: elk-service
+            port: 
+              number: 5044
