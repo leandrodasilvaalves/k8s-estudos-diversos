@@ -2,38 +2,59 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
-- role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
   extraPortMappings:
-    - containerPort: 30950
-      hostPort: 80 # webap
-    - containerPort: 30951
-      hostPort: 81 # temperatura-api
-    - containerPort: 30952
-      hostPort: 82 #nginx 
-    - containerPort: 30953
-      hostPort: 83 #mongo-express
-- role: worker
-  extraPortMappings:
-    - containerPort: 30954
-      hostPort: 84 # rabbitmq ui
-    - containerPort: 30955
-      hostPort: 85 # rabbitmq amqp
-    - containerPort: 30956
-      hostPort: 86 # kibana
-    - containerPort: 30957
-      hostPort: 87 
-- role: worker
-  extraPortMappings:
-    - containerPort: 30958
-      hostPort: 88 # logstash
-    - containerPort: 30959
-      hostPort: 89 # elastic search
-    - containerPort: 30960
-      hostPort: 90
-    - containerPort: 30961
-      hostPort: 91
-    - containerPort: 30962
-      hostPort: 92
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+
+    
+
+
+# kind: Cluster
+# apiVersion: kind.x-k8s.io/v1alpha4
+# nodes:
+# - role: control-plane
+# - role: worker
+#   extraPortMappings:
+#     - containerPort: 30950
+#       hostPort: 80 # webap
+#     - containerPort: 30951
+#       hostPort: 81 # temperatura-api
+#     - containerPort: 30952
+#       hostPort: 82 #nginx 
+#     - containerPort: 30953
+#       hostPort: 83 #mongo-express
+# - role: worker
+#   extraPortMappings:
+#     - containerPort: 30954
+#       hostPort: 84 # rabbitmq ui
+#     - containerPort: 30955
+#       hostPort: 85 # rabbitmq amqp
+#     - containerPort: 30956
+#       hostPort: 86 # kibana
+#     - containerPort: 30957
+#       hostPort: 87 
+# - role: worker
+#   extraPortMappings:
+#     - containerPort: 30958
+#       hostPort: 88 # logstash
+#     - containerPort: 30959
+#       hostPort: 89 # elastic search
+#     - containerPort: 30960
+#       hostPort: 90
+#     - containerPort: 30961
+#       hostPort: 91
+#     - containerPort: 30962
+#       hostPort: 92
 
 # k8s nodeport range: 30000-32767
 # kind create cluster --config cluster-config.yaml --name meu-cluster

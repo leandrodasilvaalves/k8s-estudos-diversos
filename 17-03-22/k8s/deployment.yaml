@@ -25,11 +25,11 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development             
         - name: ApiOptions__ForeCastApiUrl
-          # value: "http://temperatura-api-service/weatherforecast"          
+          value: "http://temperatura-api-service/weatherforecast"          
           # referenciando serviço em outro nampespace. Aqui foram criados os namespaces `api` e `webapp`
           # value: "http://temperatura-api-service.api.svc.cluster.local/weatherforecast"          
           # referenciando um servido do tipo ExternalName, porém o webapp imlantado no namespace default
-          value: "http://api-temperatura/weatherforecast"          
+          # value: "http://api-temperatura/weatherforecast"          
 
 ---
 
@@ -40,8 +40,8 @@ metadata:
 spec:
   selector:
     app: webapp
-  type: LoadBalancer   
+  type: ClusterIP   
   ports:
   - port: 80
-    nodePort: 30950
+    targetPort: 80
 

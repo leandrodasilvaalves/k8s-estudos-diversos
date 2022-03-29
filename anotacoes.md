@@ -1,6 +1,6 @@
 continuar aqui: https://kubedev.club.hotmart.com/lesson/94JMJqznOg/subindo-a-aplicacao
 
-# carregar imagem do docker local para o cluster kind
+# Carregar imagem do docker local para o cluster kind
 kind load docker-image webapp:1.0.0 --name meu-cluster
 
 # Configurar Kluster
@@ -47,3 +47,6 @@ spec:
 
 #para saber quais recursos são separáveis por namespace
 kubectl api-resources --namespaced=true
+
+#Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.2/deploy/static/provider/cloud/deploy.yaml

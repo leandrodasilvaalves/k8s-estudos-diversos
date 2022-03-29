@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: temperatura-ingress
+  labels:
+    name: temperatura-ingress
+spec:
+  rules:
+  - host: api.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: temperatura-api-service
+            port: 
+              number: 80

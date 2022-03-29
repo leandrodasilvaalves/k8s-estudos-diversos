@@ -30,7 +30,7 @@ metadata:
 spec:
   selector:
     app: temperatura-api
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 80
-    nodePort: 30951
+    targetPort: 80
