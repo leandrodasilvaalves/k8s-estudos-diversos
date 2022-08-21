@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonar-config
+data:
+  POSTGRESQL_HOST: "postgresql-service"
+  POSTGRESQL_PORT: "5444"
+  POSTGRESQL_ROOT_USER: "postgres"
+  POSTGRESQL_CLIENT_CREATE_DATABASE_NAME: "bitnami_sonarqube"
+  POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME: "bn_sonarqube"
+  SONARQUBE_DATABASE_NAME: "bitnami_sonarqube"
+  SONARQUBE_DATABASE_USER: "bn_sonarqube"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-config
+data:
+  ALLOW_EMPTY_PASSWORD: "yes"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin
+data:
+  PGADMIN_DEFAULT_EMAIL: "teste@email.com"

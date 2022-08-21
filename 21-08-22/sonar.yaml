@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube
+spec:
+  selector:
+    matchLabels:
+      app: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          image: bitnami/sonarqube:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: "sonar-config"
+            - secretRef:
+                name: "sonar-secrets"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarqube-service
+spec:
+  selector:
+    app: sonarqube
+  ports:
+    - port: 9000
+      targetPort: 9000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonar-ingress
+  labels:
+    name: sonar-ingress
+spec:
+  rules:
+    - host: sonar.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: sonarqube-service
+                port:
+                  number: 9000

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+spec:
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: bitnami/postgresql:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: "postgresql-config"
+            - secretRef:
+                name: "postgresql-secrets"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-service
+spec:
+  selector:
+    app: postgresql
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: postgresql-ingress
+  labels:
+    name: postgresql-ingress
+spec:
+  rules:
+    - host: postgres.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: postgresql-service
+                port:
+                  number: 5432
