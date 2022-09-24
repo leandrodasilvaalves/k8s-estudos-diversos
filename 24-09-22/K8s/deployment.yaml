@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-weather
+spec:
+  selector:
+    matchLabels:
+      app: open-weather
+  template:
+    metadata:
+      labels:
+        app: open-weather
+    spec:
+      containers:
+      - name: open-weather
+        image: openweather:v0.1.0.beta
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env: 
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: OpenWeather__BaseUrl
+          value: "http://api.openweathermap.org/data/2.5"
+        - name: OpenWeather__Secret
+          valueFrom:
+            secretKeyRef:
+              name: open-weather-secrets
+              key: OPEN_WEATHER_SECRET
+              optional: false

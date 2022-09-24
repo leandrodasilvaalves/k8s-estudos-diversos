@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: open-weather-ingress
+  labels:
+    name: open-weather-ingress
+spec:
+  rules:
+  - host: open-weather.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: open-weather-service
+            port: 
+              number: 80
