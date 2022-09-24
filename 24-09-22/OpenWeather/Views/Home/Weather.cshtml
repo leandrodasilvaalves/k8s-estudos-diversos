@@ -1,0 +1,11 @@
+﻿@model OpenWeather.Models.Root
+@{
+    ViewData["Title"] = "Open Weather";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p><strong>"Id": </strong> @Model.City.Id</p>
+<p><strong>"City": </strong> @Model.City.Name, @Model.City.Country</p>
+<p><strong>"Cnt": </strong> @Model.Cnt</p>
+<p><strong>"Lat": </strong> @Model.City.Coord.Lat</p>
+<p><strong>"Lon": </strong> @Model.City.Coord.Lon</p>

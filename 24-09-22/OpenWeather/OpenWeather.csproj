@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!-- <Nullable>enable</Nullable> -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>e98c4373-821d-4446-904f-091ce3f0d4e3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentResults" Version="3.13.0" />
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
+  </ItemGroup>
+
+</Project>
