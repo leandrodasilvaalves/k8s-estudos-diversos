@@ -21,6 +21,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet("weather")]
     public async Task<IActionResult> Weather([FromQuery] int city = 3458329)
     {
         var result = await _weatherService.GetOpenWeatherAsync(city);

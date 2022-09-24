@@ -4,8 +4,16 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p><strong>"Id": </strong> @Model.City.Id</p>
-<p><strong>"City": </strong> @Model.City.Name, @Model.City.Country</p>
-<p><strong>"Cnt": </strong> @Model.Cnt</p>
-<p><strong>"Lat": </strong> @Model.City.Coord.Lat</p>
-<p><strong>"Lon": </strong> @Model.City.Coord.Lon</p>
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/71iPN1z3PXL.png" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">@Model.City.Name, @Model.City.Country</h5>
+    <p><strong>Id: </strong> @Model.City.Id</p>
+    <p><strong>Cnt: </strong> @Model.Cnt</p>
+    <p><strong>Lat: </strong> @Model.City.Coord.Lat</span></p>
+    <p><strong>Lon: </strong> @Model.City.Coord.Lon</span></p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
